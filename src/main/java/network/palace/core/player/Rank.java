@@ -10,27 +10,21 @@ import java.util.Map;
 @AllArgsConstructor
 public enum Rank {
     OWNER("Owner", ChatColor.RED + "Owner ", ChatColor.RED, ChatColor.YELLOW, true, 13),
-    EXEC("Executive", ChatColor.RED + "Director ", ChatColor.RED, ChatColor.YELLOW, true, 13),
     MANAGER("Manager", ChatColor.GOLD + "Manager ", ChatColor.GOLD, ChatColor.YELLOW, true, 13),
     LEAD("Lead", ChatColor.GREEN + "Lead ", ChatColor.DARK_GREEN, ChatColor.GREEN, true, 13),
-    RETIRED("Retired Owner", ChatColor.DARK_PURPLE + "Retired Owner ", ChatColor.DARK_PURPLE, ChatColor.DARK_PURPLE, true, 13),
     DEVELOPER("Developer", ChatColor.BLUE + "Developer ", ChatColor.BLUE, ChatColor.AQUA, true, 13),
     COORDINATOR("Coordinator", ChatColor.BLUE + "Coordinator ", ChatColor.BLUE, ChatColor.AQUA, true, 12),
-    BUILDER("Imagineer", ChatColor.AQUA + "Imagineer ", ChatColor.AQUA, ChatColor.AQUA, true, 11),
-    IMAGINEER("Imagineer", ChatColor.AQUA + "Imagineer ", ChatColor.AQUA, ChatColor.AQUA, true, 11),
-    MEDIA("Cast Member", ChatColor.AQUA + "CM ", ChatColor.AQUA, ChatColor.AQUA, true, 11),
-    CM("Cast Member", ChatColor.AQUA + "CM ", ChatColor.AQUA, ChatColor.AQUA, true, 11),
-    TRAINEETECH("Trainee", ChatColor.AQUA + "Trainee ", ChatColor.AQUA, ChatColor.AQUA, false, 10),
-    TRAINEEBUILD("Trainee", ChatColor.AQUA + "Trainee ", ChatColor.AQUA, ChatColor.AQUA, false, 10),
-    TRAINEE("Trainee", ChatColor.AQUA + "Trainee ", ChatColor.AQUA, ChatColor.AQUA, false, 9),
-    CHARACTER("Character", ChatColor.DARK_PURPLE + "Character ", ChatColor.DARK_PURPLE, ChatColor.DARK_PURPLE, false, 8),
-    INFLUENCER("Influencer", ChatColor.DARK_PURPLE + "Influencer ", ChatColor.DARK_PURPLE, ChatColor.WHITE, false, 7),
+    BUILDER("Imagineer", ChatColor.AQUA + "Imagineer ", ChatColor.AQUA, ChatColor.WHITE, true, 11),
+    IMAGINEER("Imagineer", ChatColor.AQUA + "Imagineer ", ChatColor.AQUA, ChatColor.WHITE, true, 11),
+    MEDIA("Cast Member", ChatColor.AQUA + "CM ", ChatColor.AQUA, ChatColor.WHITE, true, 11),
+    CM("Cast Member", ChatColor.GOLD + "CM ", ChatColor.GREEN, ChatColor.GREEN, true, 11),
+    TRAINEETECH("Trainee", ChatColor.DARK_GREEN + "Trainee ", ChatColor.AQUA, ChatColor.WHITE, false, 10),
+    TRAINEEBUILD("Trainee", ChatColor.DARK_GREEN + "Trainee ", ChatColor.AQUA, ChatColor.WHITE, false, 10),
+    TRAINEE("Trainee", ChatColor.DARK_GREEN + "Trainee ", ChatColor.AQUA, ChatColor.WHITE, false, 9),
+    CHARACTER("Character", ChatColor.BLUE + "Character ", ChatColor.BLUE, ChatColor.BLUE, false, 8),
     VIP("VIP", ChatColor.DARK_PURPLE + "VIP ", ChatColor.DARK_PURPLE, ChatColor.WHITE, false, 7),
-    SHAREHOLDER("Shareholder", ChatColor.LIGHT_PURPLE + "Shareholder ", ChatColor.LIGHT_PURPLE, ChatColor.WHITE, false, 6),
     CLUB("Club 33", ChatColor.DARK_RED + "C33 ", ChatColor.DARK_RED, ChatColor.WHITE, false, 5),
-    DVC("DVC", ChatColor.GOLD + "DVC ", ChatColor.GOLD, ChatColor.WHITE, false, 4),
-    PASSPORT("Premier Passport", ChatColor.YELLOW + "Premier ", ChatColor.YELLOW, ChatColor.WHITE, false, 3),
-    PASSHOLDER("Passholder", ChatColor.DARK_AQUA + "Passholder ", ChatColor.DARK_AQUA, ChatColor.WHITE, false, 2),
+    DVC("DVC", ChatColor.AQUA + "DVC ", ChatColor.GOLD, ChatColor.WHITE, false, 4),
     GUEST("Guest", ChatColor.GRAY + "", ChatColor.GRAY, ChatColor.GRAY, false, 1);
 
     private static final char[] alphabet = new char[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
@@ -44,7 +38,7 @@ public enum Rank {
 
     public static Rank fromString(String name) {
         if (name == null) return GUEST;
-        if (name.equalsIgnoreCase("admin")) return LEAD;
+        if (name.equalsIgnoreCase("admin")) return MANAGER;
         String rankName = name.replaceAll(" ", "");
 
         for (Rank rank : Rank.values()) {
@@ -82,9 +76,6 @@ public enum Rank {
      * @return the rank name with any additional formatting that should exist
      */
     public String getFormattedName() {
-        if (getName() == "Premier Passport") {
-            return getTagColor() + "Premier";
-        }
         return getTagColor() + getName();
     }
 
@@ -104,9 +95,6 @@ public enum Rank {
     public String getScoreboardName() {
         int pos = ordinal();
         if (pos < 0 || pos >= alphabet.length) return "";
-        if (getName() == "Premier Passport") {
-            return String.valueOf(alphabet[pos] + "Premier");
-        }
         return String.valueOf(alphabet[pos] + getName());
     }
 
